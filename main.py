@@ -3,7 +3,8 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
 import pytz
-from sheets_helper import add_transaction
+from data.sheets_helper import add_transaction
+from chatbot.telegram_bot import run_bot
 
 app = FastAPI()
 
@@ -32,3 +33,6 @@ def add_transaction_api(
         transaction_date, request.category, request.amount, request.status, request.description
     )
     return response
+
+if __name__ == "__main__":
+    run_bot()
