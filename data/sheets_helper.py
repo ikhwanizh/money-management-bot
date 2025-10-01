@@ -16,3 +16,12 @@ def add_transaction(date, category, status, amount, description):
         return {"status": "success", "message": "Transaksi berhasil ditambahkan"}
     except Exception as e:
         return {"status": "error", "message": str(e)}
+    
+def get_all_transactions():
+    try:
+        client = get_gspread_client()
+        sheet = client.open_by_key(SPREADSHEET_ID).sheet1
+        records = sheet.get_all_records()
+        return records
+    except Exception as e:
+        return {"status": "error", "message": str(e)}

@@ -4,6 +4,7 @@ import gradio as gr
 import requests
 import os
 from dotenv import load_dotenv
+import matplotlib.pyplot as plt
 from core.service import extract_transaction_from_text
 
 load_dotenv()
@@ -20,6 +21,26 @@ def process_message(user_input):
             return f"❌ Gagal mencatat transaksi: {api_response.json()}"
     except Exception as e:
         return f"⚠️ Terjadi error: {str(e)}"
+
+def show_analytics():
+    response = requests.get(f"{API_URL}/analytics/")
+    data = response.json()
+    if "total_income" not in data:
+        return "Gagal ambil data"
+
+    fig, ax = plt.subplots()
+    labels = list(data["category_summary"].keys())
+    values = list(data["category_summary"].values())
+    ax.pie(values, labels=labels, autopct="%1.1f%%")
+    ax.set_title("Pengeluaran Berdasarkan Kategori")
+    return fig
+
+analytics_ui = gr.Interface(
+    fn=show_analytics,
+    inputs=[],
+    outputs="plot",
+    title="📊 Analisa Keuangan"
+)
 
 iface = gr.Interface(
     fn=process_message,
