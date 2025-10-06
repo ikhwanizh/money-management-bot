@@ -5,7 +5,5 @@ services:
     build: .
     container_name: my-super-bot
     restart: unless-stopped
-    env_file:
-      - .env
     volumes:
       - /opt/my_bot_config/credentials.json:/app/credentials.json:ro

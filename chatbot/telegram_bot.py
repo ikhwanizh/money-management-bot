@@ -10,13 +10,11 @@ from telegram.ext import (
 )
 import os
 import requests
-from dotenv import load_dotenv
 from core.service import extract_transaction_from_text
 
 # === Load environment ===
-load_dotenv()
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-BASE_URL = os.getenv("API_URL")
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+BASE_URL = os.environ.get("API_URL")
 
 # === Handler ===
 
