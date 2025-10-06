@@ -47,7 +47,6 @@ def get_analytics():
     category_summary = defaultdict(float)
 
     for row in data:
-        # Buat key jadi lowercase semua
         row = {k.lower(): v for k, v in row.items()}
         try:
             amount = float(row['amount'])

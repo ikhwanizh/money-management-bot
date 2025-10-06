@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  my-bot:
+    build: .
+    container_name: my-super-bot
+    restart: unless-stopped
+    env_file:
+      - .env
