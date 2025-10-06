@@ -11,3 +11,4 @@ requests
 google-generativeai
 python-dotenv
 pytz
+python-telegram-bot
